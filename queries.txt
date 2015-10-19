@@ -1,0 +1,9 @@
+var API_URL = "https://exquisite-cadaver-loopback-cathe313.c9.io/api/"
+
+To retrieve all lines of a story:
+API_URL + Stories/1/Lines?filter[fields][lineText]=true
+API_URL + Stories/1/Lines?filter={"fields":"lineText"}
+
+To retrieve a line in particular:
+API_URL + Stories/1/Lines?filter[fields][lineText]=true&filter[where][lineNumber]=1
+API_URL + Stories/1/Lines?filter={"fields":"lineText",%20"where":{"lineNumber":1}}

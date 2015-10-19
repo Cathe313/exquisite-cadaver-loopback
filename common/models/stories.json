@@ -1,0 +1,29 @@
+{
+  "name": "Stories",
+  "plural": "Stories",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "rating": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "lines": {
+      "type": "hasMany",
+      "model": "Lines",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
