@@ -4,10 +4,7 @@
     "connector": "memory"
   },
   "cadaverDatabase": {
-    "database": "cadavers",
-    "username": "cathe313",
     "name": "cadaverDatabase",
-    "connector": "mysql",
-    "hostname": "0.0.0.0"
+    "connector": "mysql"
   }
 }
