@@ -1,24 +1,22 @@
 var url = require('url');
 var mysql_url = process.env.CLEARDB_DATABASE_URL;
-// var parsed = url.parse(mysql_url);
+var parsed_url = url.parse(mysql_url);
 
-// var database = parsed.pathname.substring(1);
-
-// if (parsed.password === false) {
-//     var password = null;
-// }
-// else {
-//     password = parsed.password;
-// }
+var database = parsed_url.pathname.substring(1);
+var auth = parsed_url.auth.split(':');
+var username = auth[0];
+var password = auth[1];
 
 module.exports = {
     cadaverDatabase: {
-        username: 'cathe313',//parsed.auth,
-        //password: parsed.password,
-        hostname: "0.0.0.0",//parsed.hostname,
-        database: "cadavers"//database
+        username: username,
+        password: password,
+        hostname: parsed_url.hostname,
+        database: database
     }
 };
+
+// console.log(username, password, database, parsed_url.hostname);
 
 //From the json file:
 // "database": "cadavers",
