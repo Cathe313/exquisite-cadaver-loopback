@@ -1,4 +1,5 @@
 var loopback = require('loopback');
+var stormpath = require('loopback-stormpath');
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
@@ -15,6 +16,9 @@ app.start = function() {
     }
   });
 };
+
+// Initialize Stormpath.
+stormpath.init(app);
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.

@@ -13,9 +13,6 @@
       "./mixins"
     ]
   },
-  "User": {
-    "dataSource": "db"
-  },
   "AccessToken": {
     "dataSource": "db",
     "public": false
@@ -31,10 +28,6 @@
   "Role": {
     "dataSource": "db",
     "public": false
-  },
-  "Users": {
-    "dataSource": "db",
-    "public": true
   },
   "Stories": {
     "dataSource": "cadaverDatabase",
