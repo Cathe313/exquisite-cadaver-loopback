@@ -4,7 +4,7 @@ module.exports = function(Lines) {
     Lines.newline = function(lineNumber, storyId, lineText, cb) {
 
         var date = new Date();
-        // var Lines = app.models.Lines;
+        // var Stories = app.models.Lines;
 
         Lines.create( {"date": date, "storiesId": storyId, "lineText": lineText, "lineNumber": lineNumber}, function(err, obj){
             if (!err) {

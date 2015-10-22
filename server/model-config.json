@@ -36,5 +36,8 @@
   "Lines": {
     "dataSource": "cadaverDatabase",
     "public": true
+  },
+  "StormpathUser": {
+  "dataSource": "stormpath"
   }
 }

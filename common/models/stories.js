@@ -24,6 +24,7 @@ module.exports = function(Stories) {
             
         });
     };
+
     Stories.remoteMethod(
         'newstory', {
             accepts: [{

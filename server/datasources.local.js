@@ -1,6 +1,9 @@
 var url = require('url');
 var mysql_url = process.env.CLEARDB_DATABASE_URL;
 var parsed_url = url.parse(mysql_url);
+var stormpathKey = require('./api-keys/stormpath.js');
+
+
 
 var database = parsed_url.pathname.substring(1);
 var auth = parsed_url.auth.split(':');
@@ -13,6 +16,13 @@ module.exports = {
         password: password,
         hostname: parsed_url.hostname,
         database: database
+    },
+    stormpath: {
+        name: "stormpath",
+        connector: "stormpath",
+        apiKeyId: stormpathKey.id,
+        apiKeySecret: stormpathKey.secret,
+        applicationHref: "https://api.stormpath.com/v1/applications/" + stormpathKey.href
     }
 };
 
