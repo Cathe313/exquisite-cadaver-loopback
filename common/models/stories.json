@@ -14,7 +14,15 @@
     "rating": {
       "type": "number",
       "required": true
-    }
+    },
+    "incomplete": {
+      "type": "boolean",
+      "required": true
+    },
+    "length": {
+      "type": "number",
+      "required": false
+    } 
   },
   "validations": [],
   "relations": {
