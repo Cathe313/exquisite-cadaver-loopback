@@ -3,8 +3,6 @@ var mysql_url = process.env.CLEARDB_DATABASE_URL;
 var parsed_url = url.parse(mysql_url);
 var stormpathKey = require('./api-keys/stormpath.js');
 
-
-
 var database = parsed_url.pathname.substring(1);
 var auth = parsed_url.auth.split(':');
 var username = auth[0];
@@ -27,6 +25,7 @@ module.exports = {
 };
 
 // console.log(username, password, database, parsed_url.hostname);
+// console.log(url.parse(process.env.CLEARDB_DATABASE_URL));
 
 //From the json file:
 // "database": "cadavers",
