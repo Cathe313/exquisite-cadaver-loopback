@@ -37,7 +37,8 @@
     "dataSource": "cadaverDatabase",
     "public": true
   },
-  "User": {
-  "dataSource": "cadaverDatabase"
+  "user": {
+    "dataSource": "cadaverDatabase",
+    "public": false
   }
 }

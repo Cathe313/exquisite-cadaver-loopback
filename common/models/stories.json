@@ -22,7 +22,7 @@
     "length": {
       "type": "number",
       "required": false
-    } 
+    }
   },
   "validations": [],
   "relations": {
