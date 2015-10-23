@@ -17,7 +17,6 @@
     "loopback-connector-mysql": "^2.2.0",
     "loopback-datasource-juggler": "^2.39.0",
     "loopback-stormpath": "0.0.1",
-    "node": "0.0.0",
     "serve-favicon": "^2.0.1",
     "stormpath": "^0.13.2"
   },
