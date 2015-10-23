@@ -14,13 +14,13 @@ module.exports = {
         hostname: parsed_url.hostname,
         database: database
     },
-    stormpath: {
-        name: "stormpath",
-        connector: "stormpath",
-        apiKeyId: process.env.STORMPATH_KEY_ID,
-        apiKeySecret: process.env.STORMPATH_KEY_SEC,
-        applicationHref: "https://api.stormpath.com/v1/applications/" + process.env.STORMPATH_KEY_HREF
-    }
+    // stormpath: {
+    //     name: "stormpath",
+    //     connector: "stormpath",
+    //     apiKeyId: process.env.STORMPATH_KEY_ID,
+    //     apiKeySecret: process.env.STORMPATH_KEY_SEC,
+    //     applicationHref: "https://api.stormpath.com/v1/applications/" + process.env.STORMPATH_KEY_HREF
+    // }
 };
 
 //From the json file:
