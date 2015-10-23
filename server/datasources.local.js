@@ -1,6 +1,5 @@
 var url = require('url');
 var mysql_url = process.env.CLEARDB_DATABASE_URL;
-console.log(process.env.CLEARDB_DATABASE_URL);
 var parsed_url = url.parse(mysql_url);
 
 var database = parsed_url.pathname.substring(1);
