@@ -23,8 +23,7 @@ module.exports = {
     }
 };
 
-// console.log(username, password, database, parsed_url.hostname);
-// console.log(url.parse(process.env.CLEARDB_DATABASE_URL));
+// console.log(process.env.$STORMPATH_KEY_ID);
 
 //From the json file:
 // "database": "cadavers",
