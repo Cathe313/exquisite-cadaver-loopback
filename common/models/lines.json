@@ -18,6 +18,10 @@
     "lineText": {
       "type": "string",
       "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],

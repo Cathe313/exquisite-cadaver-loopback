@@ -39,6 +39,12 @@
   },
   "user": {
     "dataSource": "cadaverDatabase",
-    "public": false
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "Email": {
+    "dataSource": "emailDs"
   }
 }

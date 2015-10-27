@@ -6,5 +6,10 @@
   "cadaverDatabase": {
     "name": "cadaverDatabase",
     "connector": "mysql"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "defaultForType": "mail",
+    "connector": "mail"
   }
 }

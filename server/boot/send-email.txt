@@ -1,0 +1,25 @@
+
+var dsConfig = require('../datasources.local.js');
+var app = require('../../server/server');
+var Email = app.models.Email;
+
+  var yourEmailAddress = dsConfig.emailDs.transports[0].auth.user;
+
+  Email.send({
+    to: yourEmailAddress,
+    from: yourEmailAddress,
+    subject: 'The email subject',
+    text: '<strong>HTML</strong> tags are not converted'
+    //html: '<strong>HTML</strong> tags are converted'
+  }, function(err) {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        console.log('> email sent successfully');
+    }
+    
+    // done();
+  });
+
+

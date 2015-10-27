@@ -1,12 +1,12 @@
 // var app = require('../../server/server');
 
 module.exports = function(Lines) {
-    Lines.newline = function(lineNumber, storyId, lineText, cb) {
+    Lines.newline = function(lineNumber, storyId, lineText, userId, cb) {
 
         var date = new Date();
         // var Stories = app.models.Lines;
 
-        Lines.create( {"date": date, "storiesId": storyId, "lineText": lineText, "lineNumber": lineNumber}, function(err, obj){
+        Lines.create( {"date": date, "storiesId": storyId, "lineText": lineText, "lineNumber": lineNumber, "userId": userId}, function(err, obj){
             if (!err) {
                 cb(null, obj);
             }
@@ -29,6 +29,10 @@ module.exports = function(Lines) {
             }, {
                 arg: 'lineText',
                 type: 'string',
+                required: true
+            }, {
+                arg: 'userId',
+                type: 'number',
                 required: true
             }],
             returns: {

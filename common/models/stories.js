@@ -1,14 +1,14 @@
 var app = require('../../server/server');
 
 module.exports = function(Stories) {
-    Stories.newstory = function(length, lineText, cb) {
+    Stories.newstory = function(length, lineText, userId, cb) {
 
         var date = new Date();
         var Lines = app.models.Lines;
         
         Stories.create( {"date": date, "rating":  0, "incomplete": true, "length": length}, function(err, storyObj) {
             if (!err) {
-                Lines.create( {"date": date, "storiesId": storyObj.id, "lineText": lineText, "lineNumber": 1}, function(err, obj){
+                Lines.create( {"date": date, "storiesId": storyObj.id, "lineText": lineText, "lineNumber": 1, "userId": userId}, function(err, obj){
                     if (!err) {
                         cb(null, storyObj);
                     }
@@ -34,6 +34,10 @@ module.exports = function(Stories) {
             }, {
                 arg: 'lineText',
                 type: 'string',
+                required: true
+            }, {
+                arg: 'userId',
+                type: 'number',
                 required: true
             }],
             returns: {
