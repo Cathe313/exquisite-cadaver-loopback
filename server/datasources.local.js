@@ -3,7 +3,6 @@ var pass = require('./password/emailPassword.js');
 var mysql_url = process.env.CLEARDB_DATABASE_URL;
 var parsed_url = url.parse(mysql_url);
 
-
 var database = parsed_url.pathname.substring(1);
 var auth = parsed_url.auth.split(':');
 var username = auth[0];

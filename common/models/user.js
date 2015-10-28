@@ -1,72 +1,121 @@
 var path = require('path');
 var config = require('../../server/config.json');
 var app = require('../../server/server');
-// var User = app.models.User;
-
+// var dsConfig = require('../../server/datasources.local.js');
 module.exports = function(user) {
-    
-    user.on('resetPasswordRequest', function (info) {
-        var userEmail = info.email; // the email of the requested user
-        var token = info.accessToken.id; // the temp access token to allow password reset
-        console.log(info);
-    });
 
-    user.newUser = function(username, email, password, cb) {
-        user.create({"username": username, "email": email, "password": password}, function(err, user) {
-            if (!err) {
-                console.log(user);
-                cb(null, user);
+    user.on('resetPasswordRequest', function(info) {
+        var url = 'https://exquisitecadaver.net/reset?access_token=';
+        var html = 'Click <a href="' + url + info.accessToken.id + '">here</a> to reset your password';
+
+        user.app.models.Email.send({
+            to: info.email,
+            from: "Exquisite Cadaver <exquisitecadaver.noreply@gmail.com>",
+            subject: 'Password reset',
+            text: 'my text',
+            html: html
+        }, function(err) {
+            if (err) {
+                console.log(err);
             }
             else {
-                console.log("there was an error...");
-                cb(new Error("There was an " + err + " while creating your new user profile."));
+                console.log('> email sent successfully');
             }
-        });
-    },
-    
-    //send verification email after registration
-    user.afterRemote('newUser', function(cxt, user, next) {
-        console.log('> user.afterRemote triggered');
-        
-        var options = {
-          type: 'email',
-          to: user.response.email,
-          from: 'exquisitecadaver.noreply@gmail.com',
-          subject: 'Thanks for registering!',
-          template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-          redirect: '/',
-          user: user
-        };
-        user.verify(options, function(err, response, next) {
-            console.log(" in verify function");
-            if (err) {
-                next(err);
-                return;
-            }
-            console.log('> verification email sent:', response);
-            // console.log(response);
-            cxt.res.render('response', {
-                title: 'Confirm your registration to Exquisite Cadaver',
-                content: 'Please check your email and click on the verification link '
-                  + 'before logging in.',
-                redirectTo: '/',
-                redirectToLinkText: 'Log in'
-            });
         });
     });
+    
+    user.changePassword = function(token, newPassword, cb) {
+        var AccessToken = user.app.models.AccessToken;
+         
+        AccessToken.find({where:{id:token}}, function(err, instance) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                var userId = instance[0].userId;
+                
+                user.updateAll({id:userId}, {password:newPassword}, function(err, info){
+                    if (!err) {
+                        console.log(info);
+                        cb(null, info);
+                    }
+                    else {
+                        console.log(err);
+                        cb(new Error('There was an error: ' + err));
+                    }
+                    
+                });
+                
+            }
+        });
+    };
+
+
+    user.newUser = function(username, email, password, cb) {
+            user.create({
+                "username": username,
+                "email": email,
+                "password": password
+            }, function(err, user) {
+                if (!err) {
+                    // console.log(user);
+                    //send verification email after registration
+                    var url = 'http://' + config.host + ':' + config.port + '/';
+                    var options = {
+                        type: 'email',
+                        to: user.email,
+                        from: 'exquisitecadaver.noreply@gmail.com',
+                        subject: 'Thanks for registering!',
+                        template: path.resolve(__dirname, '../../server/views/verify.ejs'),
+                        redirect: '/',
+                        user: user
+                    };
+                    user.verify(options, function(err, response, next) {
+                        if (err) {
+                            next(err);
+                            return;
+                        }
+                        console.log('> verification email sent:', response);
+                        cb(null, user);
+                    });
+                }
+                else {
+                    console.log("There was an " + err + " while creating your new user profile.");
+                    cb(new Error("There was an " + err + " while creating your new user profile."));
+                }
+            });
+        },
+
+        user.remoteMethod(
+            'newUser', {
+                accepts: [{
+                    arg: 'username',
+                    type: 'string',
+                    required: true
+                }, {
+                    arg: 'email',
+                    type: 'string',
+                    required: true
+                }, {
+                    arg: 'password',
+                    type: 'string',
+                    required: true
+                }],
+                returns: {
+                    arg: 'response',
+                    type: 'object'
+                }
+            }
+        );
 
     user.remoteMethod(
-        'newUser', {
+        'changePassword', {
             accepts: [{
-                arg: 'username',
+                arg: 'token',
                 type: 'string',
                 required: true
             }, {
-                arg: 'email',
-                type: 'string',
-                required: true
-            }, {
-                arg: 'password',
+                arg: 'newPassword',
                 type: 'string',
                 required: true
             }],
@@ -76,39 +125,5 @@ module.exports = function(user) {
             }
         }
     );
-    
-    // user.context = function(cb) {
-    //     var ctx = loopback.getCurrentContext();
-    //     var accessToken = ctx.get('accessToken');
-    //     console.log('accessToken: ', accessToken);
-    //     cb(null);
-    // },
-    
-    // user.remoteMethod(
-    //     "context", {
-    //         returns: {
-    //             arg: 'response',
-    //             type: 'object'
-    //         }
-    //     });
+
 };
-
-
-    // user.beforeRemote('newUser', function(cxt, next){
-    //     user.find({where: {"username": cxt.username}}, function(err, object) {
-    //         console.log(object);
-    //         if (!err) {
-    //             if (!object) {
-    //                 next();
-    //             }
-    //             else {
-    //                 response = 'Someone has already registered with this username.';
-    //                 console.log(response);
-    //             }
-    //         }
-    //         else {
-    //             response = 'There was an ' + err;
-    //             console.log(response);
-    //         }
-    //     });
-    // });

@@ -45,7 +45,7 @@
     "dataSource": "cadaverDatabase",
     "public": true,
     "options": {
-      "emailVerificationRequired": false
+      "emailVerificationRequired": true
     }
   },
   "Email": {

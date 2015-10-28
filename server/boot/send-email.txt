@@ -4,6 +4,7 @@ var app = require('../../server/server');
 var Email = app.models.Email;
 
   var yourEmailAddress = dsConfig.emailDs.transports[0].auth.user;
+  console.log(yourEmailAddress);
 
   Email.send({
     to: yourEmailAddress,

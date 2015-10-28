@@ -4,7 +4,7 @@
   "idInjection": true,
   "options": {
     "validateUpsert": true,
-    "emailVerificationRequired": false
+    "emailVerificationRequired": true
   },
   "properties": {},
   "validations": [],
@@ -22,12 +22,6 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "newUser"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
     }
   ],
   "methods": {}
