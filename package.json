@@ -19,6 +19,7 @@
     "loopback-datasource-juggler": "^2.39.0",
     "loopback-stormpath": "0.0.1",
     "path": "^0.12.7",
+    "require": "^2.4.20",
     "serve-favicon": "^2.0.1",
     "speakeasy": "^1.0.3",
     "stormpath": "^0.13.2",

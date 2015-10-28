@@ -14,19 +14,19 @@
     ]
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "cadaverDatabase",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "cadaverDatabase",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "cadaverDatabase",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "cadaverDatabase",
     "public": false
   },
   "Stories": {
@@ -37,11 +37,15 @@
     "dataSource": "cadaverDatabase",
     "public": true
   },
+  "User": {
+    "dataSource": "cadaverDatabase",
+    "public": false
+  },
   "user": {
     "dataSource": "cadaverDatabase",
     "public": true,
     "options": {
-      "emailVerificationRequired": true
+      "emailVerificationRequired": false
     }
   },
   "Email": {
